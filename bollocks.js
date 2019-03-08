@@ -50,9 +50,9 @@ const bollocks = (n) => {
     const bollox = [];
     for (let i = 0; i < n; i++) {
         bollox.push(
+            rnd(verbs) + ' ' +
             rnd(nouns) + ' ' +
             rnd(adjectives) + ' ' +
-            rnd(verbs) + ' ' +
             rnd(adverbs)
         );
         if (i < n - 1) {
