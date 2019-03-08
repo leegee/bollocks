@@ -53,5 +53,3 @@ const report = (n = 1) => {
 module.exports.default = report;
 module.exports.report = report;
 module.exports.bollocks = bollocks;
-
-console.log(verbs);
