@@ -10,9 +10,12 @@ const verbs = `aggregate administrate accelerate architect benchmark brand build
 
 const adverbs = `adaptively authoritatively administratively advantageously ambassadorially apprehensively appropriately assertively augmentatively 
     autoschediastically biannually carefully centrally challengingly collaboratively confidentially conveniently competently completely continuously 
-    continually dramatically dynamically enthusiastically evangelistically efficiently elementarily economically enormously greatly globally heterogeneously 
-    interactively paradigmatically preemptively proactively professionally quickly revolutionarily seamlessly simultaneously synergistically vitalistically 
-    widespreadedly )]; my $adjectives = [ qw( 24/365 24/7 advanced attention-grabbing B2B B2C back-end best-of-breed bleeding-edge bricks-and-clicks clicks-and-mortar c
+    continually dramatically dynamically enthusiastically evangelistically efficiently elementarily economically enormously greatly globally 
+    heterogeneously interactively paradigmatically preemptively proactively professionally quickly revolutionarily seamlessly simultaneously synergistically
+    vitalistically widespreadedly
+    `.trim().split(/\s+/);
+
+const adjectives = `24/365 24/7 advanced attention-grabbing B2B B2C back-end best-of-breed bleeding-edge bricks-and-clicks clicks-and-mortar c
     ollaborative compelling corporate cross-platform cross-media customized cutting-edge distributed dot-com dynamic efficient eye-catching eigth-generation 
     error-free edge-of-your-seat end-to-end enterprise enterprise-class eligible exceptional extensible essential fourth-generation fifth-generation fine-grained 
     frictionless front-end global granular guinine holistic high-yield high-end impactful innovative integrated interactive interdependent intuitive internet 
@@ -26,28 +29,41 @@ const nouns = `action-items applications appliances architectures bandwidth chan
     e-business e-commerce e-markets e-services e-tailers environments experiences eyeballs features functionalities infomediaries information infrastructures
     initiatives interfaces markets m-commerce CEOs IPOs clusters designs market-growth materials methodologies metrics meta-services mindshares models networks 
     niches paradigms partnerships patterns platforms products portals relationships ROI synergies segments schemas services solutions supply-chains systems
-    technologies users web-readiness design-patterns 
+    technologies users web-readiness design-patterns
 `.trim().split(/\s+/);
+
+const joins = [' and', '.', ';', ':', ' so that', ' however', ' such that', ' so', ' whenever'];
+
+const logRnd = (list) => {
+    return list[
+        Math.floor(Math.log(1 + (Math.random() * list.length)))
+    ];
+}
 
 const rnd = (list) => {
     return list[
-        parseInt(Math.random() * list.length) - 1
+        Math.floor(Math.random() * list.length) - 1
     ];
 }
 
 const bollocks = (n) => {
-    let bollox = '';
+    const bollox = [];
     for (let i = 0; i < n; i++) {
-        bollox +=
-            rnd(adverbs) + ' ' +
+        bollox.push(
+            rnd(nouns) + ' ' +
+            rnd(adjectives) + ' ' +
             rnd(verbs) + ' ' +
-            rnd(nouns) + '. ';
+            rnd(adverbs)
+        );
+        if (i < n - 1) {
+            bollox[bollox.length - 1] += logRnd(joins);
+        }
     }
-    return bollox;
+    return bollox.join(' ');
 };
 
 const report = (n = 1) => {
-    process.stdout.write(bollocks(n));
+    process.stderr.write(bollocks(n));
 }
 
 module.exports.default = report;
