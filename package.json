@@ -1,0 +1,14 @@
+{
+  "name": "dev-bollocks",
+  "version": "0.0.1",
+  "description": "Middle-management bollocks for Javascript",
+  "main": "bollocks.js",
+  "scripts": {
+    "test": "node -e 'require(\"./bollocks\").report(2)'"
+  },
+  "keywords": [
+    "bollocks"
+  ],
+  "author": "",
+  "license": "ISC"
+}
